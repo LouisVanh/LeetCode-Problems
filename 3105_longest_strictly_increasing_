@@ -1,0 +1,28 @@
+from typing import List
+class Solution:
+    def longestMonotonicSubarray(self, nums: List[int]) -> int:
+        # You are given an array of integers nums. Return the length of the longest subarray of nums which is either strictly increasing or strictly decreasing.
+        if(len(nums) <= 2):
+            return len(nums)
+        
+        increasing, decreasing = 1, 1
+        max_num=0
+        for i in range (len(nums)-1):
+            if(nums[i] < nums[i+1]):
+                decreasing+=1
+                increasing = 1
+
+            elif(nums[i] > nums[i+1]):
+                decreasing = 1
+                increasing+=1
+
+            else:
+                increasing,decreasing = 1,1
+
+            max_num=max(increasing,decreasing,max_num)
+
+        return max_num
+    
+sol = Solution()
+r=sol.longestMonotonicSubarray([1,4,3,3,2])
+print(r)
