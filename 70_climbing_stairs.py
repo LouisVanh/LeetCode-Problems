@@ -29,19 +29,33 @@ class Solution:
     #     return dp[n]
 
     # DP: space optimised bottoms up
-    def climbStairs(self, n: int) -> int:
-        if(n<=1): return 1
-        prev2 = 1
-        prev = 1
-        curr = 1
+    # def climbStairs(self, n: int) -> int:
+    #     if(n<=1): return 1
+    #     prev2 = 1
+    #     prev = 1
+    #     curr = 1
 
-        for _ in range(2,n+1):
-            # tmp = prev2
-            prev2 = prev
-            prev = curr
-            curr = prev+prev2
-            print(curr, " is the curr value")
-        return curr
+    #     for _ in range(2,n+1):
+    #         # tmp = prev2
+    #         prev2 = prev
+    #         prev = curr
+    #         curr = prev+prev2
+    #         print(curr, " is the curr value")
+    #     return curr
+    
+    # recursive + hashmap memoization
+    def climbStairs(self, n:int) -> int:
+        cache = {}
+        def recursive_memoization(n):
+            if(n<=3): return n
+            if(n in cache): return cache[n]
+
+            else:
+                result = recursive_memoization(n-2) + recursive_memoization(n-1)
+                cache[n] = result
+                return result
+        
+        return recursive_memoization(n)
 
 sol = Solution()
 print(sol.climbStairs(40))
