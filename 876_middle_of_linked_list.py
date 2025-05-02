@@ -17,20 +17,27 @@ class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # approach 1: counting
 
-        total_nodes = 0
-        start = head
-        while (head != None):
-            total_nodes+=1
-            head=head.next
+        # total_nodes = 0
+        # start = head
+        # while (head != None):
+        #     total_nodes+=1
+        #     head=head.next
         
-        # if there are 6 total nodes, we want to grab the 4th one. (middle or right of the two middle)
-        for _ in range(total_nodes//2):
-            print(start)
-            start=start.next
+        # # if there are 6 total nodes, we want to grab the 4th one. (middle or right of the two middle)
+        # for _ in range(total_nodes//2):
+        #     print(start)
+        #     start=start.next
         
-        return start
+        # return start
 
-        # approach 2: 
+        # approach 2: slow & fast pointer
+        slow_ptr = head
+        fast_ptr = head
+        while fast_ptr and fast_ptr.next:
+            slow_ptr = slow_ptr.next
+            fast_ptr = fast_ptr.next.next
+        
+        return slow_ptr
     
 
 sol = Solution()
